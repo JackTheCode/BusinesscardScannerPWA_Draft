@@ -2,18 +2,7 @@ import React, { useState } from 'react';
 import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
 import './App.css';
-import cv from 'opencv';
 
-var lowThresh = 0;
-var highThresh = 100;
-var nIters = 2;
-var minArea = 2000;
-var maxArea = 100000;
-
-var BLUE = [0, 255, 0]; //B, G, R
-var RED   = [0, 0, 255]; //B, G, R
-var GREEN = [0, 255, 0]; //B, G, R
-var WHITE = [255, 255, 255]; //B, G, R
 function dataURItoBlob (dataURI) {
     let byteString = atob(dataURI.split(',')[1]);
   
@@ -56,46 +45,7 @@ function getFileName (imageNumber, blobType) {
 
 function saveImageFileFromBlob (blob, imageNumber) {
     var file = new File([blob], getFileName(imageNumber, blob.type));
-    cv.readImage(file, function(err, im) {
-        if (err) throw err;
-        if (im.width() < 1 || im.height() < 1) throw new Error('Image has no size');
-      
-        var out = im.copy();
-      
-        im.convertGrayscale();
-        var im_canny = im.copy();
-      
-        im_canny.canny(lowThresh, highThresh);
-        im_canny.dilate(nIters);
-      
-        var contours = im_canny.findContours();
-      
-        for (var i = 0; i < contours.size(); i++) {
-      
-          var area = contours.area(i);
-          if (area < minArea || area > maxArea) continue;
-      
-          var arcLength = contours.arcLength(i, true);
-          contours.approxPolyDP(i, 0.01 * arcLength, true);
-      
-          if (contours.cornerCount(i) != 4) continue;
-      
-          var points = [
-            contours.point(i, 0),
-            contours.point(i, 1),
-            contours.point(i, 2),
-            contours.point(i, 3)
-          ]
-      
-          out.line([points[0].x,points[0].y], [points[1].x, points[1].y], RED);
-          out.line([points[1].x,points[1].y], [points[2].x, points[2].y], RED);
-          out.line([points[2].x,points[2].y], [points[3].x, points[3].y], RED);
-          out.line([points[3].x,points[3].y], [points[0].x, points[0].y], RED);
-        }
-      
-        out.save('./tmp/quad-crosses.png');
-        console.log('Image saved to ./tmp/quad-crosses.png');
-      });
+    console.log(file)
     // window.URL = window.webkitURL || window.URL;
   
     // let anchor = document.createElement('a');
