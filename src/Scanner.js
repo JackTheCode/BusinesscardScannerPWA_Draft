@@ -69,24 +69,7 @@ function getImage() {
     .then(res => {
         console.log(res);
         window.open(serverEndpoint + "/download")
-        // if(res.file) {
-        //     downloadImage(res.file);
-        // } else {
-        //     console.log("Fail to get scan image")
-        // }
     })
-}
-
-function downloadImage(image){
-    window.URL = window.webkitURL || window.URL;
-    let anchor = document.createElement('a');
-    anchor.download = image.originalname;
-    console.log("Starting download " + image.originalname)
-    anchor.href = window.URL.createObjectURL(image);
-    console.log("ObjectURL created")
-    let mouseEvent = document.createEvent('MouseEvents');
-    mouseEvent.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
-    anchor.dispatchEvent(mouseEvent);
 }
 
 function saveImageToFile(dataUri, imageNumber) {
