@@ -52,18 +52,28 @@ function saveImageFileFromBlob (blob, imageNumber) {
     uploadImage(file);
 }
 
-async function uploadImage(file) {
+function uploadImage(file) {
     const data = new FormData();
     data.append('file', file);
     axios.post(serverEndpoint + "/upload", data, {})
     .then(res => {
-        console.log('Start get result image');
-        axios.get(serverEndpoint + "/result")
-        .then(res => {
-            const image = res.file;
-            downloadImage(image);
-        })
-        console.log(res.statusText);
+        console.log(res.data.success);
+        if(res.data.success) {
+            getImage()
+        }
+    })
+}
+
+function getImage() {
+    axios.get(serverEndpoint + "/download")
+    .then(res => {
+        console.log(res);
+        window.open(serverEndpoint + "/download")
+        // if(res.file) {
+        //     downloadImage(res.file);
+        // } else {
+        //     console.log("Fail to get scan image")
+        // }
     })
 }
 
@@ -71,7 +81,9 @@ function downloadImage(image){
     window.URL = window.webkitURL || window.URL;
     let anchor = document.createElement('a');
     anchor.download = image.originalname;
+    console.log("Starting download " + image.originalname)
     anchor.href = window.URL.createObjectURL(image);
+    console.log("ObjectURL created")
     let mouseEvent = document.createEvent('MouseEvents');
     mouseEvent.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
     anchor.dispatchEvent(mouseEvent);
