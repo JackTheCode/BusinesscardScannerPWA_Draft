@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
 import './App.css';
+import axios from 'axios';
+
+let serverEndpoint = "http://localhost:4000"
 
 function dataURItoBlob (dataURI) {
     let byteString = atob(dataURI.split(',')[1]);
@@ -46,15 +49,33 @@ function getFileName (imageNumber, blobType) {
 function saveImageFileFromBlob (blob, imageNumber) {
     var file = new File([blob], getFileName(imageNumber, blob.type));
     console.log(file)
-    // window.URL = window.webkitURL || window.URL;
-  
-    // let anchor = document.createElement('a');
-    // anchor.download = getFileName(imageNumber, blob.type);
-    // anchor.href = window.URL.createObjectURL(blob);
-    // let mouseEvent = document.createEvent('MouseEvents');
-    // mouseEvent.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
-    // anchor.dispatchEvent(mouseEvent);
-  }
+    uploadImage(file);
+}
+
+async function uploadImage(file) {
+    const data = new FormData();
+    data.append('file', file);
+    axios.post(serverEndpoint + "/upload", data, {})
+    .then(res => {
+        console.log('Start get result image');
+        axios.get(serverEndpoint + "/result")
+        .then(res => {
+            const image = res.file;
+            downloadImage(image);
+        })
+        console.log(res.statusText);
+    })
+}
+
+function downloadImage(image){
+    window.URL = window.webkitURL || window.URL;
+    let anchor = document.createElement('a');
+    anchor.download = image.originalname;
+    anchor.href = window.URL.createObjectURL(image);
+    let mouseEvent = document.createEvent('MouseEvents');
+    mouseEvent.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
+    anchor.dispatchEvent(mouseEvent);
+}
 
 function saveImageToFile(dataUri, imageNumber) {
     let blob = dataURItoBlob(dataUri);
