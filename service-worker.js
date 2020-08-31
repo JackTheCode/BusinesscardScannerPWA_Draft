@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/precache-manifest.1827207b6870e139a14c81735a1141a2.js"
+  "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/precache-manifest.5e7b8f80ca5af76bd8a9a1917f6e2742.js"
 );
 
 self.addEventListener('message', (event) => {
