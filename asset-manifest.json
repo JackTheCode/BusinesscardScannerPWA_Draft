@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/static/css/main.39b5ce7d.chunk.css",
-    "main.js": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/static/js/main.2537f1c3.chunk.js",
-    "main.js.map": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/static/js/main.2537f1c3.chunk.js.map",
+    "main.js": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/static/js/main.11d37f95.chunk.js",
+    "main.js.map": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/static/js/main.11d37f95.chunk.js.map",
     "runtime-main.js": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/static/js/runtime-main.99919bfa.js",
     "runtime-main.js.map": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/static/js/runtime-main.99919bfa.js.map",
     "static/css/2.d84865de.chunk.css": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/static/css/2.d84865de.chunk.css",
     "static/js/2.0915fc92.chunk.js": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/static/js/2.0915fc92.chunk.js",
     "static/js/2.0915fc92.chunk.js.map": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/static/js/2.0915fc92.chunk.js.map",
     "index.html": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/index.html",
-    "precache-manifest.5e7b8f80ca5af76bd8a9a1917f6e2742.js": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/precache-manifest.5e7b8f80ca5af76bd8a9a1917f6e2742.js",
+    "precache-manifest.365c91d2c221b2755f42a86052bd8c18.js": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/precache-manifest.365c91d2c221b2755f42a86052bd8c18.js",
     "service-worker.js": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/service-worker.js",
     "static/css/2.d84865de.chunk.css.map": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/static/css/2.d84865de.chunk.css.map",
     "static/css/main.39b5ce7d.chunk.css.map": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/static/css/main.39b5ce7d.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.d84865de.chunk.css",
     "static/js/2.0915fc92.chunk.js",
     "static/css/main.39b5ce7d.chunk.css",
-    "static/js/main.2537f1c3.chunk.js"
+    "static/js/main.11d37f95.chunk.js"
   ]
 }

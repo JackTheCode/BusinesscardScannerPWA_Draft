@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "dcca3b1afe0db28f1da3ad40a757d2cb",
+    "revision": "8a56ef8d70ddf1f1503ee0cbf6442e67",
     "url": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/static/css/2.d84865de.chunk.css"
   },
   {
-    "revision": "df4cfad2bb4239d8b6a2",
+    "revision": "e8e68ea75f54266e20e5",
     "url": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/static/css/main.39b5ce7d.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/static/js/2.0915fc92.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "df4cfad2bb4239d8b6a2",
-    "url": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/static/js/main.2537f1c3.chunk.js"
+    "revision": "e8e68ea75f54266e20e5",
+    "url": "/git@github.com:JackTheCode/BusinesscardScannerPWA_Draft.git/static/js/main.11d37f95.chunk.js"
   },
   {
     "revision": "84266bd73c66a32a4711",
