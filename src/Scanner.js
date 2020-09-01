@@ -6,125 +6,153 @@ import axios from 'axios';
 
 let serverEndpoint = "http://localhost:4000"
 
-function dataURItoBlob (dataURI) {
-    let byteString = atob(dataURI.split(',')[1]);
-  
-    // separate out the mime component
-    let mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-  
-    let ab = new ArrayBuffer(byteString.length);
-    let ia = new Uint8Array(ab);
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
+class Scanner extends React.Component {
+
+    onFormSubmit(e) {
+        e.preventDefault() // Stop form submit
+        this.uploadImage(this.state.file);
     }
-    let blob = new Blob([ab], {type: mimeString});
-    return blob;
-}
-  
-function padWithZeroNumber (number, width) {
-    number = number + '';
-    return number.length >= width
-      ? number
-      : new Array(width - number.length + 1).join('0') + number;
-}
-  
-function getFileExtention (blobType) {
-    // by default the extention is .png
-    let extention = IMAGE_TYPES.PNG;
-  
-    if (blobType === 'image/jpeg') {
-      extention = IMAGE_TYPES.JPG;
+
+    onChange(e) {
+        this.setState({file:e.target.files[0]}, function() {
+            console.log(this.state.file)
+        })
     }
-    return extention;
-}
 
-function getFileName (imageNumber, blobType) {
-    const prefix = 'photo';
-    const photoNumber = padWithZeroNumber(imageNumber, 4);
-    const extention = getFileExtention(blobType);
-  
-    return `${prefix}-${photoNumber}.${extention}`;
-}  
-
-function saveImageFileFromBlob (blob, imageNumber) {
-    var file = new File([blob], getFileName(imageNumber, blob.type));
-    console.log(file)
-    uploadImage(file);
-}
-
-function uploadImage(file) {
-    const data = new FormData();
-    data.append('file', file);
-    axios.post(serverEndpoint + "/upload", data, {})
-    .then(res => {
-        console.log(res.data.success);
-        if(res.data.success) {
-            getImage()
+    constructor(props) {
+        super(props);
+        this.state ={
+          file:null,
+          imageNumber: 0
         }
-    })
-}
+        this.onFormSubmit = this.onFormSubmit.bind(this)
+        this.onChange = this.onChange.bind(this)
+    }
 
-function getImage() {
-    axios.get(serverEndpoint + "/download")
-    .then(res => {
-        console.log(res);
-        window.open(serverEndpoint + "/download")
-    })
-}
+    dataURItoBlob = (dataURI) => {
+        let byteString = atob(dataURI.split(',')[1]);
+      
+        // separate out the mime component
+        let mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+      
+        let ab = new ArrayBuffer(byteString.length);
+        let ia = new Uint8Array(ab);
+        for (let i = 0; i < byteString.length; i++) {
+          ia[i] = byteString.charCodeAt(i);
+        }
+        let blob = new Blob([ab], {type: mimeString});
+        return blob;
+    }
+      
+    padWithZeroNumber = (number, width) => {
+        number = number + '';
+        return number.length >= width
+          ? number
+          : new Array(width - number.length + 1).join('0') + number;
+    }
+      
+    getFileExtention = (blobType) => {
+        // by default the extention is .png
+        let extention = IMAGE_TYPES.PNG;
+      
+        if (blobType === 'image/jpeg') {
+          extention = IMAGE_TYPES.JPG;
+        }
+        return extention;
+    }
+    
+    getFileName = (blobType) => {
+        const prefix = 'photo';
+        const photoNumber = this.padWithZeroNumber(this.state.imageNumber, 4);
+        const extention = this.getFileExtention(blobType);
+      
+        return `${prefix}-${photoNumber}.${extention}`;
+    }  
 
-function saveImageToFile(dataUri, imageNumber) {
-    let blob = dataURItoBlob(dataUri);
-    saveImageFileFromBlob(blob, imageNumber);
-}
+    uploadImage(file){
+        const data = new FormData();
+        data.append('file', file);
+        axios.post(serverEndpoint + "/upload", data, {})
+        .then(res => {
+            console.log(res.data.success);
+            if(res.data.success) {
+                this.getImage()
+            }
+        })
+    }
+    
+    saveImageFileFromBlob = (blob) => {
+        var file = new File([blob], this.getFileName(this.state.imageNumber, blob.type));
+        console.log(file)
+        this.uploadImage(file);
+    }
+    
+    getImage() {
+        axios.get(serverEndpoint + "/download")
+        .then(res => {
+            console.log(res);
+            window.open(serverEndpoint + "/download")
+        })
+    }
+    
+    saveImageToFile = (dataUri) => {
+        let blob = this.dataURItoBlob(dataUri);
+        this.saveImageFileFromBlob(blob, this.state.imageNumber);
+    }
 
-const Scanner = (props) => {
-
-    const [imageNumber, setImageNumber] = useState(0);
-
-    function handleTakePhoto (dataUri) {
-        saveImageToFile(dataUri, imageNumber)
-        setImageNumber(imageNumber + 1);
+    handleTakePhoto = (dataUri) => {
+        this.saveImageToFile(dataUri)
+        this.state.imageNumber = this.state.imageNumber + 1;
         console.log('takePhoto');
       }
      
-    function handleTakePhotoAnimationDone (dataUri) {
+    handleTakePhotoAnimationDone = (dataUri) => {
         // Do stuff with the photo...
         console.log('takePhoto');
     }
     
-    function handleCameraError (error) {
+    handleCameraError = (error) => {
         console.log('handleCameraError', error);
     }
     
-    function handleCameraStart (stream) {
+    handleCameraStart = (stream) => {
         console.log('handleCameraStart');
     }
     
-    function handleCameraStop () {
+    handleCameraStop() {
         console.log('handleCameraStop');
     }
 
-    return (
-        <div style={{ height: '100vh', width: '100%' }}>
-            <Camera
-            onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
-            onTakePhotoAnimationDone = { (dataUri) => { handleTakePhotoAnimationDone(dataUri); } }
-            onCameraError = { (error) => { handleCameraError(error); } }
-            idealFacingMode = {FACING_MODES.ENVIRONMENT}
-            idealResolution = {{width: 640, height: 480}}
-            imageType = {IMAGE_TYPES.PNG}
-            imageCompression = {0.97}
-            isMaxResolution = {true}
-            isImageMirror = {true}
-            isSilentMode = {false}
-            isDisplayStartCameraError = {true}
-            isFullscreen = {false}
-            sizeFactor = {1}
-            onCameraStart = { (stream) => { handleCameraStart(stream); } }
-            onCameraStop = { () => { handleCameraStop(); } }
-        />
-        </div>
-    )
+    render() {
+        return (
+            <div style={{ height: '100vh', width: '100%' }}>
+                <h1>Camera</h1>
+                <Camera
+                onTakePhoto = { (dataUri) => { this.handleTakePhoto(dataUri); } }
+                onTakePhotoAnimationDone = { (dataUri) => { this.handleTakePhotoAnimationDone(dataUri); } }
+                onCameraError = { (error) => { this.handleCameraError(error); } }
+                idealFacingMode = {FACING_MODES.ENVIRONMENT}
+                idealResolution = {{width: 640, height: 480}}
+                imageType = {IMAGE_TYPES.PNG}
+                imageCompression = {0.97}
+                isMaxResolution = {true}
+                isImageMirror = {true}
+                isSilentMode = {false}
+                isDisplayStartCameraError = {true}
+                isFullscreen = {false}
+                sizeFactor = {1}
+                onCameraStart = { (stream) => { this.handleCameraStart(stream); } }
+                onCameraStop = { () => { this.handleCameraStop(); } }
+               />
+               <form onSubmit={this.onFormSubmit}>
+                    <h1>File Upload</h1>
+                    <input type="file" onChange={this.onChange} />
+                    <button type="submit">Upload</button>
+               </form>
+            </div>
+        )
+    }
+
 }
  
 export default Scanner;
