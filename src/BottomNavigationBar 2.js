@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faHome, faUserCircle, faList, faTable, faCamera } from '@fortawesome/free-solid-svg-icons';
 
 const tabs = [{
-    route: "./",
+    route: "/demo",
     icon: faHome,
     label: "Home"
   },{
@@ -36,7 +36,7 @@ return (
     <div>
       <nav className="navbar navbar-expand-md navbar-light d-none d-lg-block sticky-top" role="navigation">
         <div className="container-fluid">
-            <a className="navbar-brand" href="./">Home</a>
+            <a className="navbar-brand" href="/demo">Home</a>
             <Nav className="ml-auto">
               <NavItem>
                 <NavLink to="/trader" className="nav-link">

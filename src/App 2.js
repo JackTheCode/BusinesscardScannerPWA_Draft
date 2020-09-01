@@ -45,7 +45,7 @@ class App extends Component {
        <BottomNavigation />
        <Toolbar drawerClickHandler={this.drawerToggleClickHandler}/>
        <Switch>
-          <Route path="./" component={Home} />
+          <Route path="/demo" component={Home} />
           <Route path="/trader" component={Trader} />
           <Route path="/guide" component={Guide} />
           <Route path="/report" component={Report} />

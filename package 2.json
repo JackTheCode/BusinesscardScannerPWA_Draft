@@ -1,6 +1,6 @@
 {
-  "homepage": "https://jackthecode.github.io/BusinesscardScannerPWA_Draft/",
-  "name": "scanner-demo",
+  "homepage": "http://thatduy.github.io/demo",
+  "name": "demo-pwa",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -1,5 +1,5 @@
 {
-  "name": "scanner-demo",
+  "name": "demo-pwa",
   "version": "0.1.0",
   "lockfileVersion": 1,
   "requires": true,
@@ -3321,6 +3321,11 @@
       "version": "1.0.3",
       "resolved": "https://registry.npmjs.org/buffer-xor/-/buffer-xor-1.0.3.tgz",
       "integrity": "sha1-JuYe0UIvtw3ULm42cp7VHYVf6Nk="
+    },
+    "buffers": {
+      "version": "0.1.1",
+      "resolved": "https://registry.npmjs.org/buffers/-/buffers-0.1.1.tgz",
+      "integrity": "sha1-skV5w77U1tOWru5tmorn9Ugqt7s="
     },
     "builtin-status-codes": {
       "version": "3.0.0",
@@ -8731,8 +8736,7 @@
     "nan": {
       "version": "2.14.1",
       "resolved": "https://registry.npmjs.org/nan/-/nan-2.14.1.tgz",
-      "integrity": "sha512-isWHgVjnFjh2x2yuJ/tj3JbwoHu3UC2dX5G/88Cm24yB6YopVgxvBObDY7n5xW6ExmFhJpSEQqFPvq9zaXc8Jw==",
-      "optional": true
+      "integrity": "sha512-isWHgVjnFjh2x2yuJ/tj3JbwoHu3UC2dX5G/88Cm24yB6YopVgxvBObDY7n5xW6ExmFhJpSEQqFPvq9zaXc8Jw=="
     },
     "nanomatch": {
       "version": "1.2.13",
@@ -9154,6 +9158,14 @@
             "is-docker": "^2.0.0"
           }
         }
+      }
+    },
+    "opencv": {
+      "version": "github:peterbraden/node-opencv#f0a03a4be7064ca4d75ff2f16f8cf206fe982456",
+      "from": "github:peterbraden/node-opencv",
+      "requires": {
+        "buffers": "^0.1.1",
+        "nan": "^2.14.0"
       }
     },
     "opn": {
